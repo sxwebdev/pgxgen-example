@@ -1,0 +1,53 @@
+version: 1
+output_crud_sql_file_name: "crud_queries.sql"
+crud_params:
+  tables:
+    # Authors
+    authors:
+      primary_column: id
+      methods:
+        create:
+          skip_columns:
+            - id
+            - updated_at
+          returning: "*"
+        update:
+          skip_columns:
+            - id
+            - created_at
+          returning: "*"
+        find:
+          order:
+            by: created_at
+            direction: DESC
+        get:
+          name: GetAuthorByID
+        delete:
+        total:
+
+    # Books
+    books:
+      primary_column: id
+      methods:
+        create:
+          skip_columns:
+            - id
+            - updated_at
+          returning: "*"
+        update:
+          skip_columns:
+            - id
+            - created_at
+            - author_id
+          returning: "*"
+        find:
+          name: FindBooksByAuthorID
+          where:
+            author_id:
+          order:
+            by: created_at
+            direction: DESC
+        get:
+          name: GetBookByID
+        delete:
+        total:
