@@ -4,49 +4,47 @@ import (
 	"context"
 
 	"github.com/google/uuid"
-	"github.com/sxwebdev/pgxgen-example/internal/store"
+	"github.com/sxwebdev/pgxgen-example/internal/models"
+	"github.com/sxwebdev/pgxgen-example/internal/store/repos/repo_books"
+	"github.com/sxwebdev/pgxgen-example/internal/store/storecmn"
 )
 
-func (s *Service) Create(ctx context.Context, req store.CreateBookParams) (*store.Book, error) {
+func (s *Service) Create(ctx context.Context, req CreateParams) (*models.Book, error) {
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
 
-	return s.store.CreateBook(ctx, req)
+	return s.store.Books().Create(ctx, repo_books.CreateParams(req))
 }
 
-func (s *Service) Update(ctx context.Context, req store.UpdateBookParams) (*store.Book, error) {
+func (s *Service) Update(ctx context.Context, req UpdateParams) (*models.Book, error) {
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
 
-	return s.store.UpdateBook(ctx, req)
+	return s.store.Books().Update(ctx, repo_books.UpdateParams(req))
 }
 
 func (s *Service) Delete(ctx context.Context, id uuid.UUID) error {
 	if id == uuid.Nil {
-		return store.ErrEmptyBookID
+		return storecmn.ErrEmptyBookID
 	}
 
-	return s.store.DeleteBook(ctx, id)
+	return s.store.Books().Delete(ctx, id)
 }
 
 func (s *Service) Total(ctx context.Context) (int64, error) {
-	return s.store.TotalBooks(ctx)
+	return s.store.Books().Total(ctx)
 }
 
-func (s *Service) Get(ctx context.Context, id uuid.UUID) (*store.Book, error) {
+func (s *Service) Get(ctx context.Context, id uuid.UUID) (*models.Book, error) {
 	if id == uuid.Nil {
-		return nil, store.ErrEmptyBookID
+		return nil, storecmn.ErrEmptyBookID
 	}
 
-	return s.store.GetBookByID(ctx, id)
+	return s.store.Books().GetBookByID(ctx, id)
 }
 
-func (s *Service) FindByBooksByAuthorID(ctx context.Context, authorId uuid.UUID) ([]*store.Book, error) {
-	if authorId == uuid.Nil {
-		return nil, store.ErrEmptyAuthorID
-	}
-
-	return s.store.FindBooksByAuthorID(ctx, authorId)
+func (s *Service) Find(ctx context.Context, params FindParams) ([]*models.Book, error) {
+	return s.store.Books().Find(ctx, repo_books.FindParams(params))
 }

@@ -7,8 +7,8 @@ import (
 	"github.com/sxwebdev/pgxgen-example/internal/config"
 	"github.com/sxwebdev/pgxgen-example/internal/handler"
 	"github.com/sxwebdev/pgxgen-example/internal/store"
-	"github.com/tkcrm/modules/db/postgres"
-	"github.com/tkcrm/modules/logger"
+	"github.com/tkcrm/modules/pkg/db/postgres"
+	"github.com/tkcrm/modules/pkg/logger"
 )
 
 type Server struct {
@@ -31,7 +31,7 @@ func New(ctx context.Context, logger logger.Logger, config *config.Config) (*Ser
 		return nil, errors.Wrap(err, "error initializing db")
 	}
 	s.db = conn
-	s.store = store.New(s.db.DB)
+	s.store = store.New(s.db)
 
 	// init handker
 	s.handler = handler.New(logger, config, s.store)

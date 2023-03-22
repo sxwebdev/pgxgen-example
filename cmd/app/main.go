@@ -7,8 +7,8 @@ import (
 
 	"github.com/sxwebdev/pgxgen-example/internal/config"
 	"github.com/sxwebdev/pgxgen-example/internal/server"
-	"github.com/tkcrm/modules/cfg"
-	"github.com/tkcrm/modules/logger"
+	"github.com/tkcrm/modules/pkg/cfg"
+	"github.com/tkcrm/modules/pkg/logger"
 )
 
 func main() {

@@ -13,7 +13,7 @@ db-create-migration:
 	migrate create -ext sql -dir "$(MIGRATIONS_DIR)" $(filter-out $@,$(MAKECMDGOALS))
 
 gensql:
-	pgxgen crud -c "$(POSTGRES_DSN)"
+	pgxgen crud
 	pgxgen sqlc generate
 
 install-tools:

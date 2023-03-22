@@ -1,18 +1,28 @@
 package store
 
-import "github.com/tkcrm/modules/db/postgres"
+import (
+	"github.com/jackc/pgx/v4/pgxpool"
+	"github.com/sxwebdev/pgxgen-example/internal/store/repos"
+	"github.com/tkcrm/modules/pkg/db/postgres"
+)
 
 type IStore interface {
-	// Postgres
-	Querier
+	repos.IRepos
+	DBConn() *pgxpool.Pool
 }
 
-type Store struct {
-	*Queries
+type store struct {
+	repos.IRepos
+	psql *postgres.PostgreSQL
 }
 
-func NewStore(db *postgres.PostgreSQL) IStore {
-	return &Store{
-		Queries: New(db.DB),
+func New(psql *postgres.PostgreSQL) IStore {
+	return &store{
+		IRepos: repos.New(psql),
+		psql:   psql,
 	}
+}
+
+func (s *store) DBConn() *pgxpool.Pool {
+	return s.psql.DB
 }
