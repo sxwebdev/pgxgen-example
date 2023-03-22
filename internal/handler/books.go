@@ -7,7 +7,7 @@ import (
 	"github.com/sxwebdev/pgxgen-example/internal/models"
 	"github.com/sxwebdev/pgxgen-example/internal/services/books"
 	"github.com/sxwebdev/pgxgen-example/internal/store"
-	"github.com/tkcrm/modules/logger"
+	"github.com/tkcrm/modules/pkg/logger"
 )
 
 type BooksServer struct {

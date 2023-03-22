@@ -2,8 +2,8 @@ package config
 
 import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/tkcrm/modules/db/postgres"
-	"github.com/tkcrm/modules/logger"
+	"github.com/tkcrm/modules/pkg/db/postgres"
+	"github.com/tkcrm/modules/pkg/logger"
 )
 
 // Config ...

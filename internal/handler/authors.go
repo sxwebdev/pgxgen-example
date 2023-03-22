@@ -7,7 +7,7 @@ import (
 	"github.com/sxwebdev/pgxgen-example/internal/models"
 	"github.com/sxwebdev/pgxgen-example/internal/services/authors"
 	"github.com/sxwebdev/pgxgen-example/internal/store"
-	"github.com/tkcrm/modules/logger"
+	"github.com/tkcrm/modules/pkg/logger"
 )
 
 type AuthorsServer struct {

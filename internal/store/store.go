@@ -3,7 +3,7 @@ package store
 import (
 	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/sxwebdev/pgxgen-example/internal/store/repos"
-	"github.com/tkcrm/modules/db/postgres"
+	"github.com/tkcrm/modules/pkg/db/postgres"
 )
 
 type IStore interface {

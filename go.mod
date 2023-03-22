@@ -5,10 +5,13 @@ go 1.20
 require (
 	github.com/georgysavva/scany v1.2.1
 	github.com/huandu/go-sqlbuilder v1.20.0
-	github.com/tkcrm/modules v0.0.0-20221021220942-eda4c456f92a
+	github.com/tkcrm/modules v0.0.0-20230308042354-885154fb5ff9
 )
 
-require github.com/huandu/xstrings v1.3.2 // indirect
+require (
+	github.com/aws/smithy-go v1.13.5 // indirect
+	github.com/huandu/xstrings v1.4.0 // indirect
+)
 
 require (
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect

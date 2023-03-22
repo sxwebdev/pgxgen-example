@@ -3,7 +3,7 @@ package books
 import (
 	"github.com/sxwebdev/pgxgen-example/internal/config"
 	"github.com/sxwebdev/pgxgen-example/internal/store"
-	"github.com/tkcrm/modules/logger"
+	"github.com/tkcrm/modules/pkg/logger"
 )
 
 type Service struct {

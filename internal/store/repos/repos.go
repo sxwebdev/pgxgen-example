@@ -3,7 +3,7 @@ package repos
 import (
 	"github.com/sxwebdev/pgxgen-example/internal/store/repos/repo_authors"
 	"github.com/sxwebdev/pgxgen-example/internal/store/repos/repo_books"
-	"github.com/tkcrm/modules/db/postgres"
+	"github.com/tkcrm/modules/pkg/db/postgres"
 )
 
 type IRepos interface {

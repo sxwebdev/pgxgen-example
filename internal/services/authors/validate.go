@@ -5,7 +5,7 @@ import (
 	"github.com/go-ozzo/ozzo-validation/v4/is"
 	"github.com/google/uuid"
 	"github.com/sxwebdev/pgxgen-example/internal/store/storecmn"
-	"github.com/tkcrm/modules/validate"
+	"github.com/tkcrm/modules/pkg/validate"
 )
 
 func (s *CreateParams) Validate() error {

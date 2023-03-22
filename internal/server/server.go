@@ -7,8 +7,8 @@ import (
 	"github.com/sxwebdev/pgxgen-example/internal/config"
 	"github.com/sxwebdev/pgxgen-example/internal/handler"
 	"github.com/sxwebdev/pgxgen-example/internal/store"
-	"github.com/tkcrm/modules/db/postgres"
-	"github.com/tkcrm/modules/logger"
+	"github.com/tkcrm/modules/pkg/db/postgres"
+	"github.com/tkcrm/modules/pkg/logger"
 )
 
 type Server struct {
