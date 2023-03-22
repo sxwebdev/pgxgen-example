@@ -1,9 +1,20 @@
 version: 1
-output_crud_sql_file_name: "crud_queries.sql"
+sqlc_move_models:
+  # required
+  output_dir: "internal/models"
+  # default: models.go
+  output_filename: "models_gen.go"
+  # new package name. by default based on `output_dir`
+  package_name: models
+  # required. full path to new models directory
+  package_path: github.com/sxwebdev/pgxgen-example/internal/models
 crud_params:
+  auto_remove_generated_files: true
+  exclude_table_name_from_methods: true
   tables:
     # Authors
     authors:
+      output_dir: sql/queries/authors
       primary_column: id
       methods:
         create:
@@ -27,6 +38,7 @@ crud_params:
 
     # Books
     books:
+      output_dir: sql/queries/books
       primary_column: id
       methods:
         create:
@@ -40,14 +52,13 @@ crud_params:
             - created_at
             - author_id
           returning: "*"
-        find:
-          name: FindBooksByAuthorID
-          where:
-            author_id:
-          order:
-            by: created_at
-            direction: DESC
         get:
           name: GetBookByID
         delete:
         total:
+go_constants:
+  tables:
+    authors:
+      output_dir: internal/store/repos/repo_authors
+    books:
+      output_dir: internal/store/repos/repo_books

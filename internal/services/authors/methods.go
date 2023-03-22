@@ -4,50 +4,52 @@ import (
 	"context"
 
 	"github.com/google/uuid"
-	"github.com/sxwebdev/pgxgen-example/internal/store"
+	"github.com/sxwebdev/pgxgen-example/internal/models"
+	"github.com/sxwebdev/pgxgen-example/internal/store/repos/repo_authors"
+	"github.com/sxwebdev/pgxgen-example/internal/store/storecmn"
 )
 
-func (s *Service) Create(ctx context.Context, req store.CreateAuthorParams) (*store.Author, error) {
+func (s *Service) Create(ctx context.Context, req CreateParams) (*models.Author, error) {
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
 
-	return s.store.CreateAuthor(ctx, req)
+	return s.store.Authors().Create(ctx, repo_authors.CreateParams(req))
 }
 
-func (s *Service) Update(ctx context.Context, req store.UpdateAuthorParams) (*store.Author, error) {
+func (s *Service) Update(ctx context.Context, req UpdateParams) (*models.Author, error) {
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
 
-	return s.store.UpdateAuthor(ctx, req)
+	return s.store.Authors().Update(ctx, repo_authors.UpdateParams(req))
 }
 
 func (s *Service) Delete(ctx context.Context, id uuid.UUID) error {
 	if id == uuid.Nil {
-		return store.ErrEmptyAuthorID
+		return storecmn.ErrEmptyAuthorID
 	}
 
 	// Remove all books
-	if err := s.store.DeleteBooksByAuthorID(ctx, id); err != nil {
+	if err := s.store.Books().DeleteByAuthorID(ctx, id); err != nil {
 		return err
 	}
 
-	return s.store.DeleteAuthor(ctx, id)
+	return s.store.Authors().Delete(ctx, id)
 }
 
 func (s *Service) Total(ctx context.Context) (int64, error) {
-	return s.store.TotalAuthors(ctx)
+	return s.store.Authors().Total(ctx)
 }
 
-func (s *Service) Get(ctx context.Context, id uuid.UUID) (*store.Author, error) {
+func (s *Service) Get(ctx context.Context, id uuid.UUID) (*models.Author, error) {
 	if id == uuid.Nil {
-		return nil, store.ErrEmptyAuthorID
+		return nil, storecmn.ErrEmptyAuthorID
 	}
 
-	return s.store.GetAuthorByID(ctx, id)
+	return s.store.Authors().GetAuthorByID(ctx, id)
 }
 
-func (s *Service) Find(ctx context.Context) ([]*store.Author, error) {
-	return s.store.FindAuthors(ctx)
+func (s *Service) Find(ctx context.Context) ([]*models.Author, error) {
+	return s.store.Authors().Find(ctx)
 }

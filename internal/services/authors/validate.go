@@ -1,18 +1,14 @@
-package store
+package authors
 
 import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"github.com/go-ozzo/ozzo-validation/v4/is"
 	"github.com/google/uuid"
+	"github.com/sxwebdev/pgxgen-example/internal/store/storecmn"
 	"github.com/tkcrm/modules/validate"
 )
 
-type AuthorNotifications struct {
-	Email bool `json:"email"`
-	Sms   bool `json:"sms"`
-}
-
-func (s *CreateAuthorParams) Validate() error {
+func (s *CreateParams) Validate() error {
 	if s.Phone != nil {
 		if err := validate.Phone(*s.Phone); err != nil {
 			return err
@@ -27,9 +23,9 @@ func (s *CreateAuthorParams) Validate() error {
 	)
 }
 
-func (s *UpdateAuthorParams) Validate() error {
+func (s *UpdateParams) Validate() error {
 	if s.ID == uuid.Nil {
-		return ErrEmptyAuthorID
+		return storecmn.ErrEmptyID
 	}
 
 	if s.Phone != nil {

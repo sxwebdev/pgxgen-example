@@ -1,13 +1,14 @@
-package store
+package books
 
 import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"github.com/google/uuid"
+	"github.com/sxwebdev/pgxgen-example/internal/store/storecmn"
 )
 
-func (s *CreateBookParams) Validate() error {
+func (s *CreateParams) Validate() error {
 	if s.AuthorID == uuid.Nil {
-		return ErrEmptyAuthorID
+		return storecmn.ErrEmptyAuthorID
 	}
 
 	return validation.ValidateStruct(
@@ -18,9 +19,9 @@ func (s *CreateBookParams) Validate() error {
 	)
 }
 
-func (s *UpdateBookParams) Validate() error {
+func (s *UpdateParams) Validate() error {
 	if s.ID == uuid.Nil {
-		return ErrEmptyAuthorID
+		return storecmn.ErrEmptyAuthorID
 	}
 
 	return validation.ValidateStruct(

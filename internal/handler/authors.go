@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/sxwebdev/pgxgen-example/internal/config"
+	"github.com/sxwebdev/pgxgen-example/internal/models"
 	"github.com/sxwebdev/pgxgen-example/internal/services/authors"
 	"github.com/sxwebdev/pgxgen-example/internal/store"
 	"github.com/tkcrm/modules/logger"
@@ -25,6 +26,6 @@ func newAuthorsServer(l logger.Logger, c *config.Config, st store.IStore, author
 	}
 }
 
-func (s *AuthorsServer) Create(ctx context.Context, req store.CreateAuthorParams) (*store.Author, error) {
+func (s *AuthorsServer) Create(ctx context.Context, req authors.CreateParams) (*models.Author, error) {
 	return s.authorsService.Create(ctx, req)
 }
