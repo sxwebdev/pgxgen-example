@@ -41,7 +41,7 @@ func (s *CustomQuerier) Find(ctx context.Context, params FindParams) ([]*models.
 	// execute query
 	items := []*models.Book{}
 	sql, args := sb.Build()
-	if err := pgxscan.Get(ctx, s.psql, items, sql, args...); err != nil {
+	if err := pgxscan.Select(ctx, s.psql, items, sql, args...); err != nil {
 		return nil, err
 	}
 
