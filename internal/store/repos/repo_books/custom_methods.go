@@ -3,7 +3,7 @@ package repo_books
 import (
 	"context"
 
-	"github.com/georgysavva/scany/pgxscan"
+	"github.com/georgysavva/scany/v2/pgxscan"
 	"github.com/huandu/go-sqlbuilder"
 	"github.com/sxwebdev/pgxgen-example/internal/models"
 )
