@@ -7,6 +7,7 @@ import (
 	"github.com/sxwebdev/pgxgen-example/internal/models"
 	"github.com/sxwebdev/pgxgen-example/internal/store/repos/repo_authors"
 	"github.com/sxwebdev/pgxgen-example/internal/store/storecmn"
+	"github.com/tkcrm/modules/pkg/utils"
 )
 
 func (s *Service) Create(ctx context.Context, req CreateParams) (*models.Author, error) {
@@ -14,7 +15,12 @@ func (s *Service) Create(ctx context.Context, req CreateParams) (*models.Author,
 		return nil, err
 	}
 
-	return s.store.Authors().Create(ctx, repo_authors.CreateParams(req))
+	var params repo_authors.CreateParams
+	if err := utils.JsonToStruct(req, &params); err != nil {
+		return nil, err
+	}
+
+	return s.store.Authors().Create(ctx, params)
 }
 
 func (s *Service) Update(ctx context.Context, req UpdateParams) (*models.Author, error) {
@@ -22,7 +28,12 @@ func (s *Service) Update(ctx context.Context, req UpdateParams) (*models.Author,
 		return nil, err
 	}
 
-	return s.store.Authors().Update(ctx, repo_authors.UpdateParams(req))
+	var params repo_authors.UpdateParams
+	if err := utils.JsonToStruct(req, &params); err != nil {
+		return nil, err
+	}
+
+	return s.store.Authors().Update(ctx, params)
 }
 
 func (s *Service) Delete(ctx context.Context, id uuid.UUID) error {

@@ -1,7 +1,7 @@
 package store
 
 import (
-	"github.com/jackc/pgx/v4/pgxpool"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/sxwebdev/pgxgen-example/internal/store/repos"
 	"github.com/tkcrm/modules/pkg/db/postgres"
 )

@@ -7,6 +7,7 @@ import (
 	"github.com/sxwebdev/pgxgen-example/internal/models"
 	"github.com/sxwebdev/pgxgen-example/internal/store/repos/repo_books"
 	"github.com/sxwebdev/pgxgen-example/internal/store/storecmn"
+	"github.com/tkcrm/modules/pkg/utils"
 )
 
 func (s *Service) Create(ctx context.Context, req CreateParams) (*models.Book, error) {
@@ -14,7 +15,12 @@ func (s *Service) Create(ctx context.Context, req CreateParams) (*models.Book, e
 		return nil, err
 	}
 
-	return s.store.Books().Create(ctx, repo_books.CreateParams(req))
+	var params repo_books.CreateParams
+	if err := utils.JsonToStruct(req, &params); err != nil {
+		return nil, err
+	}
+
+	return s.store.Books().Create(ctx, params)
 }
 
 func (s *Service) Update(ctx context.Context, req UpdateParams) (*models.Book, error) {
@@ -22,7 +28,12 @@ func (s *Service) Update(ctx context.Context, req UpdateParams) (*models.Book, e
 		return nil, err
 	}
 
-	return s.store.Books().Update(ctx, repo_books.UpdateParams(req))
+	var params repo_books.UpdateParams
+	if err := utils.JsonToStruct(req, &params); err != nil {
+		return nil, err
+	}
+
+	return s.store.Books().Update(ctx, params)
 }
 
 func (s *Service) Delete(ctx context.Context, id uuid.UUID) error {

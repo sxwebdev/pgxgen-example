@@ -1,6 +1,6 @@
 package repos
 
-import "github.com/jackc/pgx/v4"
+import "github.com/jackc/pgx/v5"
 
 type Option func(*Options)
 
